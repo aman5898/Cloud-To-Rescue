@@ -1,0 +1,39 @@
+<div class="modal-header">
+    <h4 class="modal-title">Add Person</h4>
+  </div>
+  
+  <div class="modal-body">
+    <form class="form">
+      <div class="form-group">
+        <label>Person Name</label>
+        <input name="personName" type="text" class="form-control" [(ngModel)]="name">
+        <label>Age</label>
+        <input name="Age" type="text" class="form-control" [(ngModel)]="age">
+        <label>Place of Living</label>
+        <input name="Place" type="text" class="form-control" [(ngModel)]="place">
+        <label>City of Living</label>
+        <input name="City" type="text" class="form-control" [(ngModel)]="city">
+        <label>State of Living</label>
+        <input name="State" type="text" class="form-control" [(ngModel)]="state">
+        <label>Birth Marks</label>
+        <input name="BirthMarks" type="text" class="form-control" [(ngModel)]="birthMarks">
+        <label>Fathers Name</label>
+        <input name="FathersName" type="text" class="form-control" [(ngModel)]="fathersName">
+        <label>Contact Name</label>
+        <input name="ContactName" type="text" class="form-control" [(ngModel)]="contactName">
+        <label>Contact No</label>
+        <input name="ContactName" type="text" class="form-control" [(ngModel)]="contactNo">
+        <label>Address</label>
+        <input name="Address" type="text" class="form-control" [(ngModel)]="address">
+        <label>Height</label>
+        <input name="Height" type="text" class="form-control" [(ngModel)]="height">
+        <label>Gender</label>
+        <input name="Gender" type="text" class="form-control" [(ngModel)]="gender">
+      </div>
+    </form>
+  </div>
+  
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="save()">Save</button>
+    <button type="button" class="btn btn-secondary" (click)="activeModal.dismiss()">Cancel</button>
+  </div>
