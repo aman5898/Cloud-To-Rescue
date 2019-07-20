@@ -100,6 +100,7 @@ export class ConfigurationComponent implements OnInit {
             userData: result
           };
           this.personFaces.push(newFace);
+          this.trainPersonGroup();
         });
     });
   }

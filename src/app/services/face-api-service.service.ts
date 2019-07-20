@@ -101,6 +101,7 @@ export class FaceApiService {
   }
 
   identify(personGroupId, faceIds) {
+    console.log(personGroupId);
     let request = {
       personGroupId: personGroupId,
       faceIds: faceIds,

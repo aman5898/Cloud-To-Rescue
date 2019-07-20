@@ -14,6 +14,7 @@ select {
 
 .face-box-yellow {
     position: absolute;
+    top:150px;
     border: 3px solid yellow;
     background-color: transparent;
     cursor: pointer;
@@ -24,4 +25,8 @@ select {
     border: 3px solid green;
     background-color: transparent;
     cursor: pointer;
+}
+
+.card{
+    top: 80px;
 }

@@ -15,9 +15,9 @@ export class FaceTesterComponent implements OnInit {
   public identifiedPersons = [];
   public imageUrl: string;
   public multiplier: number;
-  public personGroups = [];
+  public personGroups = ["ms-hack"];
   public selectedFace: any;
-  public selectedGroupId = "";
+  public selectedGroupId = "ms-hack";
   public selectedFiles: FileList;
   @ViewChild("mainImg",{ static: false }) mainImg;
 
@@ -71,7 +71,6 @@ export class FaceTesterComponent implements OnInit {
   identify() {
     let faceIds = _.map(this.detectedFaces, "faceId");
     this.loading = true;
-
     //NOTE: for Production app, max groups of 10
     this.faceApi
       .identify(this.selectedGroupId, faceIds)
