@@ -42,6 +42,7 @@
   
         <div *ngIf="selectedFace" class="text-primary">
           <pre class="text-primary">{{ selectedFace | json }}</pre>
+          <pre class="text-primary">{{ faceClickedDetails | json }}</pre>
         </div>
         <div *ngIf="selectedFace && selectedFace.identifiedPerson">
           <ngb-alert> Subject Identified: {{ selectedFace.name }} </ngb-alert>

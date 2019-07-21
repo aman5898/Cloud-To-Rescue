@@ -21,6 +21,7 @@ export class FaceTesterComponent implements OnInit {
   public selectedGroupId = "ms-hack";
   public selectedFiles: FileList;
   private detectedOnce=false;
+  public faceClickedDetails:any;
   @ViewChild("mainImg", { static: false }) mainImg;
 
   constructor(
@@ -76,7 +77,9 @@ export class FaceTesterComponent implements OnInit {
       let identifiedPerson = _.find(this.identifiedPersons, {
         personId: face.identifiedPersonId
       });
+      console.log(identifiedPerson);
       this.selectedFace.name = identifiedPerson.name;
+      this.faceClickedDetails=JSON.parse(identifiedPerson.userData);
       if(this.detectedOnce==true){
         this.toastr.pop(
           "info",
@@ -120,7 +123,7 @@ export class FaceTesterComponent implements OnInit {
         });
 
         // Call getPerson() for each identified face
-        forkJoin(obsList).subscribe(results => {
+        forkJoin(obsList).subscribe(results => {         
           this.identifiedPersons = results;
           this.loading = false;
         });
