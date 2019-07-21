@@ -27,16 +27,7 @@ export class ConfigurationComponent implements OnInit {
     private storageService: StorageService
   ) {}
 
-  upload() {
-    const file = this.selectedFiles.item(0);
-    this.storageService.uploadFile(file).subscribe(response => {
-      console.log("URL:",response)
-    });
-  }
-
-  selectFile(event) {
-    this.selectedFiles = event.target.files;
-  }
+  
 
   ngOnInit() {
     this.loading = true;
@@ -50,6 +41,11 @@ export class ConfigurationComponent implements OnInit {
   }  
 
   personClick(person) {
+    this.toastr.pop(
+      "info",
+      "Loading Person",
+      "Please wait..."
+    );
     this.selectedPerson = person;
     this.faceApi
       .getPersonFaces(this.selectedGroupId, this.selectedPerson.personId)
@@ -59,6 +55,7 @@ export class ConfigurationComponent implements OnInit {
   }
 
   addPerson() {
+    
       this.inputBox.showAddPerson().then(result => {
       let personName=JSON.parse(result+"").name      
       let newPerson: any = { name: personName };
@@ -87,6 +84,7 @@ export class ConfigurationComponent implements OnInit {
   }
 
   addPersonFace() {
+    
     this.inputBox.show("Add Face", "URL:").then(result => {
       this.faceApi
         .addPersonFace(
@@ -106,6 +104,11 @@ export class ConfigurationComponent implements OnInit {
   }
 
   deletePersonFace(persistedFaceId) {
+    this.toastr.pop(
+      "info",
+      "Deleting Face",
+      "Please wait..."
+    );
     this.faceApi
       .deletePersonFace(
         this.selectedGroupId,
@@ -114,17 +117,18 @@ export class ConfigurationComponent implements OnInit {
       )
       .subscribe(() => {
         _.remove(this.personFaces, x => x.persistedFaceId === persistedFaceId);
+        this.trainPersonGroup();
       });
   }
 
   trainPersonGroup() {
     this.loading = true;
     this.faceApi.trainPersonGroup(this.selectedGroupId).subscribe(() => {
-      this.toastr.pop(
-        "info",
-        "Training Initiated",
-        "Training has been initiated..."
-      );
+      // this.toastr.pop(
+      //   "info",
+      //   "Training Initiated",
+      //   "Training has been initiated..."
+      // );
       this.loading = false;
     });
   }

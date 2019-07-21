@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { StorageService } from '../services/storage.service';
+import { ToasterService } from "angular2-toaster";
 
 @Component({
   selector: "app-input-box",
@@ -14,7 +15,8 @@ export class InputBoxComponent implements OnInit {
 
   constructor(
     public activeModal: NgbActiveModal,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private toastr: ToasterService,
   ) {}
 
   ngOnInit() {}
@@ -24,6 +26,11 @@ export class InputBoxComponent implements OnInit {
   }
 
   upload() {
+     this.toastr.pop(
+        "info",
+        "Adding Face",
+        "Please wait..."
+      );
     const file = this.selectedFiles.item(0);
     this.storageService.uploadFile(file).subscribe(response => {
       console.log(response);
