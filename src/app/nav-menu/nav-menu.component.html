@@ -10,6 +10,11 @@
               <span class='fa fa-home'></span> Home
             </a>
           </li>
+          <li class="nav-item" *ngIf="userLoggedIn" (click)="logOut()">
+            <a class="nav-item nav-link">
+              <span class='fa fa-sign-out'></span> SignOut
+            </a>
+          </li>
           <!-- <li class="nav-item">
             <a class="nav-item nav-link" [routerLink]="['/configuration']" [routerLinkActive]="['link-active']">
               <span class='fa fa-users'></span> Configure

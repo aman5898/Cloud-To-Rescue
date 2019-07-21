@@ -4,6 +4,7 @@ import { InputBoxService } from "../input-box/input-box.service";
 import * as _ from "lodash";
 import { ToasterService } from "angular2-toaster";
 import { StorageService } from '../services/storage.service';
+import { MsAdalAngular6Service } from 'microsoft-adal-angular6';
 
 @Component({
   selector: "app-configuration",
@@ -24,7 +25,8 @@ export class ConfigurationComponent implements OnInit {
     private faceApi: FaceApiService,
     private inputBox: InputBoxService,
     private toastr: ToasterService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private adalSvc: MsAdalAngular6Service
   ) {}
 
   
@@ -39,6 +41,11 @@ export class ConfigurationComponent implements OnInit {
       this.loading = false;
     });
   }  
+
+  logOut(){
+    console.log("aman");
+    this.adalSvc.logout();
+  }
 
   personClick(person) {
     this.toastr.pop(

@@ -49,7 +49,8 @@ import { AuthenticationGuard } from 'microsoft-adal-angular6';
         api: "e84501ef-94eb-4755-91f0-0e88cb21a197"        
       },
       navigateToLoginRequestUrl: false,
-      cacheLocation: 'localStorage'
+      cacheLocation: 'localStorage',
+      postLogoutRedirectUri :window.location.origin
     }),
     BrowserModule,
     BrowserAnimationsModule,
