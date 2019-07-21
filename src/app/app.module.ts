@@ -44,7 +44,7 @@ import { AuthenticationGuard } from 'microsoft-adal-angular6';
     MsAdalAngular6Module.forRoot({
       tenant: '0aa055ee-c128-4530-b1ba-7769b321e640',
       clientId: 'e84501ef-94eb-4755-91f0-0e88cb21a197',
-      redirectUri: `${window.location.origin}/test-faces`,
+      redirectUri: `${window.location.origin}/report`,
       endpoints: { 
         api: "e84501ef-94eb-4755-91f0-0e88cb21a197"        
       },
