@@ -87,6 +87,7 @@ export class ConfigurationComponent implements OnInit {
           x => x.personId === this.selectedPerson.personId
         );
         this.selectedPerson = null;
+        this.trainPersonGroup();
       });
   }
 

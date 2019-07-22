@@ -20,8 +20,8 @@ export class FaceTesterComponent implements OnInit {
   public selectedFace: any;
   public selectedGroupId = "ms-hack";
   public selectedFiles: FileList;
-  private detectedOnce=false;
-  public faceClickedDetails:any;
+  private detectedOnce = false;
+  public faceClickedDetails: any;
   @ViewChild("mainImg", { static: false }) mainImg;
 
   constructor(
@@ -39,6 +39,16 @@ export class FaceTesterComponent implements OnInit {
   }
 
   upload() {
+    this.loading = false;
+    this.detectedFaces="";
+    this.identifiedPersons = [];
+    this.imageUrl="";
+    this.multiplier=null;
+    this.personGroups = ["ms-hack"];
+    this.selectedFace="";
+    this.selectedGroupId = "ms-hack";
+    this.detectedOnce = false;
+    this.faceClickedDetails="";
     this.toastr.pop("info", "Searching Face", "Please wait...");
     const file = this.selectedFiles.item(0);
     this.storageService.uploadFile(file).subscribe(response => {
@@ -54,7 +64,7 @@ export class FaceTesterComponent implements OnInit {
 
   detect() {
     this.loading = true;
-    this.faceApi.detect(this.imageUrl).subscribe(data => {      
+    this.faceApi.detect(this.imageUrl).subscribe(data => {
       if (data.length == 0) {
         this.loading = false;
         this.toastr.pop(
@@ -68,10 +78,10 @@ export class FaceTesterComponent implements OnInit {
         this.loading = false;
         this.identify();
       }
-    });    
+    });
   }
 
-  faceClicked(face) {    
+  faceClicked(face) {
     this.selectedFace = face;
     if (this.selectedFace.identifiedPersonId) {
       let identifiedPerson = _.find(this.identifiedPersons, {
@@ -79,30 +89,29 @@ export class FaceTesterComponent implements OnInit {
       });
       console.log(identifiedPerson);
       this.selectedFace.name = identifiedPerson.name;
-      this.faceClickedDetails=JSON.parse(identifiedPerson.userData);
-      if(this.detectedOnce==true){
+      this.faceClickedDetails = JSON.parse(identifiedPerson.userData);
+      if (this.detectedOnce == true) {
         this.toastr.pop(
           "info",
           this.selectedFace.name,
           "Please scroll above to know more..."
         );
-      }      
+      }
     }
   }
 
   identify() {
-    
     let faceIds = _.map(this.detectedFaces, "faceId");
     this.loading = true;
     //NOTE: for Production app, max groups of 10
     this.faceApi
       .identify(this.selectedGroupId, faceIds)
-      .subscribe(identifiedFaces => {        
-        let obsList = [];        
+      .subscribe(identifiedFaces => {
+        let obsList = [];
         console.log(identifiedFaces);
         _.forEach(identifiedFaces, identifiedFace => {
           if (identifiedFace.candidates.length > 0) {
-            this.detectedOnce=true;
+            this.detectedOnce = true;
             let detectedFace = _.find(this.detectedFaces, {
               faceId: identifiedFace.faceId
             });
@@ -123,18 +132,18 @@ export class FaceTesterComponent implements OnInit {
         });
 
         // Call getPerson() for each identified face
-        forkJoin(obsList).subscribe(results => {         
+        forkJoin(obsList).subscribe(results => {
           this.identifiedPersons = results;
           this.loading = false;
         });
 
-        if(this.detectedOnce==true){
+        if (this.detectedOnce == true) {
           this.toastr.pop(
             "success",
             "Face Found",
             "Click on the green box to know more"
           );
-        }else{
+        } else {
           this.toastr.pop(
             "error",
             "No match found",
